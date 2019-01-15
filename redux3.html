@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+  <div>
+        <button type="submit" name="button" onclick="store.dispatch(loginUser())">Login</button>
+        <button type="submit" name="button" onclick="store.dispatch(logoutUser())">Logout</button>
+        <h3 id="theStore"></h3>
+  </div>
+
+
+
+</body>
+</html>
+
+<script>
+
+    const reducer = (state = defaultState, action) =>{
+        switch(action.type){
+            case LOGIN:
+            return {
+                login: true,
+                stateVal: 'You are logged in'
+            }
+            return state
+
+            case LOGOUT:
+            return{
+                login: false,
+                stateVal: 'You are logged out'
+            }
+            return state
+
+            default:
+            return state
+        }
+    }
+
+const LOGIN = 'Login'
+const LOGOUT = 'Logout'
+
+const defaultState = {
+    login: false,
+    stateVal: ''
+};
+
+const store = Redux.createStore(reducer);
+store.subscribe(()=> {
+    document.getElementById('theStore').innerText = store.getState().stateVal
+})
+
+const loginUser = () => {
+    return {
+        type: LOGIN
+    }
+}
+
+const logoutUser = () => {
+    return {
+        type: LOGOUT
+    }
+}
+</script>
